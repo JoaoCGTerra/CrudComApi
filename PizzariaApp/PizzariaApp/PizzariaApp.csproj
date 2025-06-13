@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DD53D95E-1AA6-43E2-BB32-344F8A320944}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PizzariaAPI</RootNamespace>
+    <AssemblyName>PizzariaAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbaLogin\Home\Clientes\HomeCliente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Clientes\HomeCliente.Designer.cs">
+      <DependentUpon>HomeCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Filiais\CriarFilial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Filiais\CriarFilial.Designer.cs">
+      <DependentUpon>CriarFilial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Filiais\DeletarFilial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Filiais\DeletarFilial.Designer.cs">
+      <DependentUpon>DeletarFilial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Filiais\EditarFilial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Filiais\EditarFilial.Designer.cs">
+      <DependentUpon>EditarFilial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Filiais\HomeFilial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Filiais\HomeFilial.Designer.cs">
+      <DependentUpon>HomeFilial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Filiais\VerFilial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Filiais\VerFilial.Designer.cs">
+      <DependentUpon>VerFilial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Funcionarios\CriarFuncionario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Funcionarios\CriarFuncionario.Designer.cs">
+      <DependentUpon>CriarFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Funcionarios\DeletarFuncionario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Funcionarios\DeletarFuncionario.Designer.cs">
+      <DependentUpon>DeletarFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Funcionarios\EditarFuncionario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Funcionarios\EditarFuncionario.Designer.cs">
+      <DependentUpon>EditarFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Funcionarios\HomeFuncionario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Funcionarios\HomeFuncionario.Designer.cs">
+      <DependentUpon>HomeFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Funcionarios\VerFuncionario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Funcionarios\VerFuncionario.Designer.cs">
+      <DependentUpon>VerFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Produtos\CriarProduto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Produtos\CriarProduto.Designer.cs">
+      <DependentUpon>CriarProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Produtos\DeletarProduto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Produtos\DeletarProduto.Designer.cs">
+      <DependentUpon>DeletarProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Produtos\EditarProduto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Produtos\EditarProduto.Designer.cs">
+      <DependentUpon>EditarProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Produtos\HomeProduto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Produtos\HomeProduto.Designer.cs">
+      <DependentUpon>HomeProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Produtos\VerProduto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Produtos\VerProduto.Designer.cs">
+      <DependentUpon>VerProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Login.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Clientes\EditarCliente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Clientes\EditarCliente.Designer.cs">
+      <DependentUpon>EditarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Clientes\CriarCliente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Clientes\CriarCliente.Designer.cs">
+      <DependentUpon>CriarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Clientes\DeletarCliente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Clientes\DeletarCliente.Designer.cs">
+      <DependentUpon>DeletarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Home.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Clientes\VerCliente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AbaLogin\Home\Clientes\VerCliente.Designer.cs">
+      <DependentUpon>VerCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DadosGeral\Clientes\UsuarioPF.cs" />
+    <Compile Include="PizzariaApp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PizzariaApp.Designer.cs">
+      <DependentUpon>PizzariaApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AbaLogin\Home\Clientes\HomeCliente.resx">
+      <DependentUpon>HomeCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Filiais\CriarFilial.resx">
+      <DependentUpon>CriarFilial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Filiais\DeletarFilial.resx">
+      <DependentUpon>DeletarFilial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Filiais\EditarFilial.resx">
+      <DependentUpon>EditarFilial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Filiais\HomeFilial.resx">
+      <DependentUpon>HomeFilial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Filiais\VerFilial.resx">
+      <DependentUpon>VerFilial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Funcionarios\CriarFuncionario.resx">
+      <DependentUpon>CriarFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Funcionarios\DeletarFuncionario.resx">
+      <DependentUpon>DeletarFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Funcionarios\EditarFuncionario.resx">
+      <DependentUpon>EditarFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Funcionarios\HomeFuncionario.resx">
+      <DependentUpon>HomeFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Funcionarios\VerFuncionario.resx">
+      <DependentUpon>VerFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Produtos\CriarProduto.resx">
+      <DependentUpon>CriarProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Produtos\DeletarProduto.resx">
+      <DependentUpon>DeletarProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Produtos\EditarProduto.resx">
+      <DependentUpon>EditarProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Produtos\HomeProduto.resx">
+      <DependentUpon>HomeProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Produtos\VerProduto.resx">
+      <DependentUpon>VerProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Clientes\EditarCliente.resx">
+      <DependentUpon>EditarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Clientes\CriarCliente.resx">
+      <DependentUpon>CriarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Clientes\DeletarCliente.resx">
+      <DependentUpon>DeletarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbaLogin\Home\Clientes\VerCliente.resx">
+      <DependentUpon>VerCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PizzariaApp.resx">
+      <DependentUpon>PizzariaApp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folhasBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C R U D %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pizzaria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pizzaria.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DadosGeral\Filiais\" />
+    <Folder Include="DadosGeral\Funcionarios\" />
+    <Folder Include="DadosGeral\Produtos\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
