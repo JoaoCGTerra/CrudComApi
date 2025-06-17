@@ -1,12 +1,16 @@
+using System.Text.Json;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pizzaria.Data;
 using Pizzaria.Models;
+using Pizzaria.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>();
-
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ValidatorCliente>());
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
     serverOptions.ListenAnyIP(3000);
@@ -35,17 +39,24 @@ app.MapGet("bebidas/", (AppDbContext a) => {
     return Results.Ok(bebidas);
 });
 
-app.MapPost("/newCliente", async (Tb_cliente cliente, AppDbContext a ) => {
-    if (cliente == null) return Results.BadRequest("Falta dado");
+app.MapPost("/newCliente", async (HttpContext context ,IValidator<Tb_cliente> validator, Tb_cliente cliente, AppDbContext a) => {
+    try {
+        var validacaoUsuario = await validator.ValidateAsync(cliente);
 
-    a.Tb_cliente.Add(cliente);
-    await a.SaveChangesAsync();
+        if (!validacaoUsuario.IsValid) {
+            return Results.BadRequest(validacaoUsuario.Errors.Select(e => e.ErrorMessage));
+        }
 
-    return Results.Created($"/cliente/{cliente.Id}", cliente);
+        a.Tb_cliente.Add(cliente);
+        await a.SaveChangesAsync();
+
+        return Results.Created($"/cliente/{cliente.Id}", cliente);
+    }
+    catch (JsonException) {
+        return Results.BadRequest("Erro no JSON");
+    }
+
 });
-
-
-
 
 
 
