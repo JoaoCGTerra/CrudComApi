@@ -39,7 +39,7 @@ app.MapGet("bebidas/", (AppDbContext a) => {
     return Results.Ok(bebidas);
 });
 
-app.MapPost("/newCliente", async (HttpContext context ,IValidator<Tb_cliente> validator, Tb_cliente cliente, AppDbContext a) => {
+app.MapPost("/newCliente", async (IValidator<Tb_cliente> validator, Tb_cliente cliente, AppDbContext a) => {
     try {
         var validacaoUsuario = await validator.ValidateAsync(cliente);
 
@@ -56,6 +56,20 @@ app.MapPost("/newCliente", async (HttpContext context ,IValidator<Tb_cliente> va
         return Results.BadRequest("Erro no JSON");
     }
 
+});
+//Acha cliente por id
+app.MapGet("/cliente/{id}", async ([FromRoute]int id , [FromServices]AppDbContext a) => {
+    try {
+        var busca = await a.Tb_cliente.FindAsync(id);
+        if (busca == null) {
+            return Results.NotFound("Cliente não encontrado");
+        }
+        return busca;
+    }
+    catch{
+        return Results.BadRequest($"Erro na consulta\n{e}");
+    }
+    
 });
 
 
