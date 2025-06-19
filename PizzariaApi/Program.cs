@@ -10,7 +10,7 @@ using Pizzaria.Validators;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>();
-builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ValidatorCliente>());
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters().AddValidatorsFromAssemblyContaining<ValidatorCliente>();
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
     serverOptions.ListenAnyIP(3000);
