@@ -38,8 +38,30 @@ app.MapGet("bebidas/", (AppDbContext a) => {
     var bebidas = a.Tb_bebida.ToList();
     return Results.Ok(bebidas);
 });
+//Acha cliente por id
+app.MapGet("/cliente/{id}", async (HttpContext context, [FromServices] AppDbContext a) => {
 
-app.MapPost("/newCliente", async (IValidator<Tb_cliente> validator, Tb_cliente cliente, AppDbContext a) => {
+    var recebido = context.Request.RouteValues["id"];
+
+    if (!int.TryParse((string?)recebido, out int id)) {
+        return Results.BadRequest("Valor na rota não é um INT");
+    }
+
+    try {
+        var busca = await a.Tb_cliente.FindAsync(id);
+        if (busca == null) {
+            return Results.NotFound($"Cliente {id} não encontrado");
+        }
+        return Results.Ok(busca);
+    }
+    catch (Exception e) {
+        return Results.BadRequest($"Erro na consulta\n{e}");
+    }
+
+});
+
+
+app.MapPost("/newCliente", async ([FromServices]IValidator<Tb_cliente> validator, [FromBody]Tb_cliente cliente, [FromServices]AppDbContext a) => {
     try {
         var validacaoUsuario = await validator.ValidateAsync(cliente);
 
@@ -57,20 +79,47 @@ app.MapPost("/newCliente", async (IValidator<Tb_cliente> validator, Tb_cliente c
     }
 
 });
-//Acha cliente por id
-app.MapGet("/cliente/{id}", async ([FromRoute]int id , [FromServices]AppDbContext a) => {
+
+app.MapPut("/modCliente/{id}", async ([FromRoute] int id, [FromBody]Tb_cliente cliente, [FromServices] AppDbContext a) =>{
+
+    var clienteEncontrado = a.Tb_cliente.FirstOrDefault(x => x.Id == id);
+    if(clienteEncontrado == null) {
+        return Results.NotFound();
+    }
+
     try {
-        var busca = await a.Tb_cliente.FindAsync(id);
-        if (busca == null) {
-            return Results.NotFound("Cliente não encontrado");
-        }
-        return busca;
+        clienteEncontrado.Nome_cliente = cliente.Nome_cliente;
+        clienteEncontrado.Email_cliente = cliente.Email_cliente;
+        clienteEncontrado.Rua_cliente = cliente.Rua_cliente;
+        clienteEncontrado.Numero_rua_cliente = cliente.Numero_rua_cliente;
+        clienteEncontrado.Cidade_cliente = cliente.Cidade_cliente;
+        clienteEncontrado.Estado_cliente = cliente.Estado_cliente;
+        clienteEncontrado.Cep_cliente = cliente.Cep_cliente;
+        clienteEncontrado.Hash_senha_cliente = cliente.Hash_senha_cliente;
+        clienteEncontrado.Is_admin = cliente.Is_admin;
+
+        a.Tb_cliente.Update(clienteEncontrado);
+
+        await a.SaveChangesAsync();
+
+        return Results.Ok("Cliente alterado");
+    }catch(Exception e) {
+        return Results.BadRequest($"Erro ao atualizar no banco: {e}");
     }
-    catch{
-        return Results.BadRequest($"Erro na consulta\n{e}");
-    }
-    
+
 });
+
+app.MapDelete("/delCliente/{id}", ([FromRoute] int id, [FromServices] AppDbContext a)=>{
+
+    var clienteBuscado = a.Tb_cliente.FirstOrDefault(x => x.Id == id);
+    try {
+        a.Tb_cliente.ExecuteDelete();
+        return Results.Ok();
+    }catch(Exception e) {
+        return Results.BadRequest($"Erro ao excluid cliente: {e}");
+    }
+});
+
 
 
 
