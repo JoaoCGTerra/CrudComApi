@@ -41,9 +41,9 @@ app.MapGet("bebidas/", (AppDbContext a) => {
 //Acha cliente por id
 app.MapGet("/cliente/{id}", async (HttpContext context, [FromServices] AppDbContext a) => {
 
-    var recebido = context.Request.RouteValues["id"];
+    var Idrecebido = context.Request.RouteValues["id"];
 
-    if (!int.TryParse((string?)recebido, out int id)) {
+    if (!int.TryParse((string?)Idrecebido, out int id)) {
         return Results.BadRequest("Valor na rota não é um INT");
     }
 
@@ -109,14 +109,25 @@ app.MapPut("/modCliente/{id}", async ([FromRoute] int id, [FromBody]Tb_cliente c
 
 });
 
-app.MapDelete("/delCliente/{id}", ([FromRoute] int id, [FromServices] AppDbContext a)=>{
+app.MapDelete("/delCliente/{id}", async (HttpContext context, [FromServices] AppDbContext a)=>{
+
+    var Idrecebido = context.Request.RouteValues["id"];
+
+    if (!int.TryParse((string?)Idrecebido, out int id)) {
+        return Results.BadRequest("Valor na rota não é um INT");
+    }
 
     var clienteBuscado = a.Tb_cliente.FirstOrDefault(x => x.Id == id);
+    if(clienteBuscado == null) {
+        return Results.BadRequest("Cliente não encontrado");
+    }
     try {
-        a.Tb_cliente.ExecuteDelete();
-        return Results.Ok();
+        a.Tb_cliente.Remove(clienteBuscado);
+        await a.SaveChangesAsync();
+        return Results.Ok("Cliente excluído do banco de dados");
+
     }catch(Exception e) {
-        return Results.BadRequest($"Erro ao excluid cliente: {e}");
+        return Results.BadRequest($"Erro ao excluir cliente: {e}");
     }
 });
 
