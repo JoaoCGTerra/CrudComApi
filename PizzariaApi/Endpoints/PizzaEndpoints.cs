@@ -15,5 +15,9 @@ public static class PizzaEndpoints {
             return Results.Ok(pizzas);
         });
 
+        //Nova pizza
+        app.MapPut("/newPizza", () => {
+        
+        });
     }
 }
