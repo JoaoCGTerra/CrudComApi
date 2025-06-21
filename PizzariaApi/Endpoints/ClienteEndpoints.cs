@@ -21,7 +21,7 @@ public static class ClienteEndpoints {
             var IdRecebido = context.Request.RouteValues["id"];
 
             if (!int.TryParse((string?)IdRecebido, out int id)) {
-                return Results.BadRequest("Valor na rota não é um INT");
+                return Results.BadRequest("Valor na rota não é um ID valido");
             }
 
             try {
@@ -38,25 +38,31 @@ public static class ClienteEndpoints {
 
         //Novo cliente
         app.MapPost("/newCliente", async ([FromServices] IValidator<Tb_cliente> validator, [FromBody] Tb_cliente cliente, [FromServices] AppDbContext a) => {
+            var validacaoCliente = await validator.ValidateAsync(cliente);
+
+            if (!validacaoCliente.IsValid) {
+                return Results.BadRequest(validacaoCliente.Errors.Select(e => e.ErrorMessage));
+            }
+
             try {
-                var validacaoUsuario = await validator.ValidateAsync(cliente);
-
-                if (!validacaoUsuario.IsValid) {
-                    return Results.BadRequest(validacaoUsuario.Errors.Select(e => e.ErrorMessage));
-                }
-
                 a.Tb_cliente.Add(cliente);
                 await a.SaveChangesAsync();
 
                 return Results.Created($"/cliente/{cliente.Id}", cliente);
             }
-            catch (JsonException) {
-                return Results.BadRequest("Erro no JSON");
+            catch (Exception e) {
+                return Results.BadRequest($"Erro ao inserir no banco de dados\n{e}");
             }
         });
 
         //Modificar cliente
-        app.MapPut("/modCliente/{id}", async ([FromRoute] int id, [FromBody] Tb_cliente cliente, [FromServices] AppDbContext a) => {
+        app.MapPut("/modCliente/{idRecebido}", async (HttpContext context, [FromBody] Tb_cliente cliente, [FromServices] AppDbContext a) => {
+
+            var idRecebido = context.Request.RouteValues["idRecebido"];
+
+            if(!int.TryParse((string?)idRecebido, out int id)) {
+                return Results.BadRequest("Valor na rota não é um ID valido");
+            }
 
             var clienteEncontrado = a.Tb_cliente.FirstOrDefault(x => x.Id == id);
             if (clienteEncontrado == null) {
@@ -80,7 +86,7 @@ public static class ClienteEndpoints {
                 return Results.Ok("Cliente alterado");
             }
             catch (Exception e) {
-                return Results.BadRequest($"Erro ao atualizar no banco: {e}");
+                return Results.BadRequest($"Erro ao modificar no banco de dados: {e}");
             }
         });
 
@@ -90,7 +96,7 @@ public static class ClienteEndpoints {
             var IdRecebido = context.Request.RouteValues["id"];
 
             if (!int.TryParse((string?)IdRecebido, out int id)) {
-                return Results.BadRequest("Valor na rota não é um INT");
+                return Results.BadRequest("Valor na rota não é um ID valido");
             }
 
             var clienteBuscado = a.Tb_cliente.FirstOrDefault(x => x.Id == id);
@@ -104,7 +110,7 @@ public static class ClienteEndpoints {
 
             }
             catch (Exception e) {
-                return Results.BadRequest($"Erro ao excluir cliente: {e}");
+                return Results.BadRequest($"Erro ao remover do banco de dados: {e}");
             }
         });
     }

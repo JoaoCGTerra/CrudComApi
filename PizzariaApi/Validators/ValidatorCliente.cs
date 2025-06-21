@@ -6,6 +6,8 @@ namespace Pizzaria.Validators {
     public class ValidatorCliente : AbstractValidator<Tb_cliente> {
         public ValidatorCliente() {
 
+            RuleFor(a => a.Id).Null().WithMessage("Campo [Id] deve ser null");
+
             RuleFor(a => a.Nome_cliente)
                 .NotEmpty().WithMessage("Nome inválido");
 
