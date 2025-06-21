@@ -1,4 +1,3 @@
-using System.Text.Json;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Pizzaria.Data;
@@ -9,8 +8,9 @@ namespace Pizzaria.Endpoints;
 public static class FilialEndpoints {
     
     public static void MapFilialEndpoints (this WebApplication app){
+
         //Todas as filiais
-        app.MapGet("/filiais/", (AppDbContext a) => {
+        app.MapGet("/filiais/", ([FromServices]AppDbContext a) => {
             var filiais = a.Tb_filiais.ToList();
             return Results.Ok(filiais);
         });

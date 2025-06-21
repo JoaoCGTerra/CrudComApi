@@ -1,4 +1,3 @@
-using System.Text.Json;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Pizzaria.Data;
@@ -10,7 +9,7 @@ public static class ClienteEndpoints {
     public static void MapClienteEndpoints (this WebApplication app) {
         
         //Todos clientes
-        app.MapGet("/clientes", (AppDbContext a) => {
+        app.MapGet("/clientes", ([FromServices] AppDbContext a) => {
             var clientes = a.Tb_cliente.ToList();
             return Results.Ok(clientes);
         });
